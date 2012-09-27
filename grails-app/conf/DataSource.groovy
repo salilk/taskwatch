@@ -25,7 +25,7 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost:3306/taskwatch?useUnicode=yes&characterEncoding=UTF-8"
+            url = "jdbc:mysql://localhost:3306/taskwatch_dev?useUnicode=yes&characterEncoding=UTF-8"
         }
     }
     test {
@@ -37,7 +37,7 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:mysql://localhost:3306/taskwatch?useUnicode=yes&characterEncoding=UTF-8"
             pooled = true
             properties {
                maxActive = -1
