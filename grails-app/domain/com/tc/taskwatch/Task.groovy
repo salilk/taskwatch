@@ -3,8 +3,8 @@ package com.tc.taskwatch
 class Task {
 
     String description
-    Long timeEstimated
-    Long timeChallenged
+    Integer timeEstimated
+    Integer timeChallenged
     Long timeTaskStarted
     Long timeTaskFinished
     Date dateCreated
@@ -31,6 +31,28 @@ class Task {
         if(timeTaskFinished){
             return (timeTaskFinished - timeTaskStarted)/1000*60
         }
+        0
+    }
+
+    Integer getScore(){
+        Integer timeTaken = timeActual
+        if(timeTaken > 0){
+            getScore(timeEstimated, timeActual, (timeChallenged?:timeEstimated))
+        }
+        0
+    }
+
+    Integer getScore(Integer estimate, Integer actual, Integer challenge){
+        Integer score = Math.toDegrees(Math.atan(estimate/actual)) as Integer
+        Integer scoreChallenge = Math.toDegrees(Math.atan(estimate/challenge)) as Integer
+        if(challenge > estimate){
+            //TODO: working hard case
+            score = 90-score
+            scoreChallenge = 90-scoreChallenge
+        }
+
+        println "score and challenge diff: ${score-scoreChallenge}"
+
         0
     }
 

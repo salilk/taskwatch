@@ -23,10 +23,11 @@
 			<table>
 				<thead>
 					<tr>
-                        <g:sortableColumn property="description" title="${message(code: 'task.description.label', default: 'Description')}" />
-                        <g:sortableColumn property="timeEstimated" title="${message(code: 'task.timeEstimated.label', default: 'Time Estimated')}" />
-                        <g:sortableColumn property="timeChallenged" title="${message(code: 'task.timeChallenged.label', default: 'Time Challenged')}" />
+                        <g:sortableColumn style="width: 300px;" property="description" title="${message(code: 'task.description.label', default: 'Description')}" />
+                        <g:sortableColumn style="width: 80px;" property="timeEstimated" title="${message(code: 'task.timeEstimated.label', default: 'Time Estimated')}" />
+                        <g:sortableColumn style="width: 80px;" property="timeChallenged" title="${message(code: 'task.timeChallenged.label', default: 'Time Challenged')}" />
                         <g:sortableColumn property="timeActual" title="${message(code: 'task.timeChallenged.label', default: 'Time Actual')}" />
+                        <th>Status</th>
 						%{--<g:sortableColumn property="timeTaskStarted" title="${message(code: 'task.timeTaskStarted.label', default: 'Time Task Started')}" />--}%
 						%{--<g:sortableColumn property="timeTaskFinished" title="${message(code: 'task.timeTaskFinished.label', default: 'Time Task Finished')}" />--}%
                         %{--<g:sortableColumn property="dateCreated" title="${message(code: 'task.dateCreated.label', default: 'Date Created')}" />--}%
@@ -39,9 +40,19 @@
 					
 						<td><g:link action="show" id="${taskInstance.id}">${fieldValue(bean: taskInstance, field: "description")}</g:link></td>
                         %{--<td>${fieldValue(bean: taskInstance, field: "description")}</td>--}%
-                        <td>${fieldValue(bean: taskInstance, field: "timeEstimated")}</td>
-                        <td>${fieldValue(bean: taskInstance, field: "timeChallenged")}</td>
-                        <td>${fieldValue(bean: taskInstance, field: "timeActual")}</td>
+                        <td>${fieldValue(bean: taskInstance, field: "timeEstimated")} mins</td>
+                        <td>${fieldValue(bean: taskInstance, field: "timeChallenged")} mins</td>
+                        <td>${fieldValue(bean: taskInstance, field: "timeActual")} mins</td>
+                        <g:if test="${taskInstance.timeTaskFinished}">
+                            <td>${fieldValue(bean: taskInstance, field: "score")}</td>
+                        </g:if>
+                        <g:elseif test="${taskInstance.timeTaskStarted}">
+                            <td><button onclick="alert('Ajax Call.');" value="Start">FINISH</button></td>
+                        </g:elseif>
+                        <g:else>
+                            <td><button onclick="alert('Ajax Call.');" value="Start">START</button></td>
+                        </g:else>
+
                         %{--<td>${fieldValue(bean: taskInstance, field: "timeTaskStarted")}</td>--}%
                         %{--<td>${fieldValue(bean: taskInstance, field: "timeTaskFinished")}</td>--}%
 						%{--<td><g:link action="show" id="${taskInstance.id}">${fieldValue(bean: taskInstance, field: "dateCreated")}</g:link></td>--}%
