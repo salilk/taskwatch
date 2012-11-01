@@ -1,3 +1,5 @@
+import org.scribe.builder.api.FacebookApi
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -92,4 +94,14 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+}
+oauth {
+    providers {
+        facebook {
+            api = FacebookApi
+            key='553673661313288'
+            secret='1256feff00470476bec4281cf2cfc6e7'
+            callback = "${application.baseUrl}/oauth/facebook/callback"
+        }
+    }
 }

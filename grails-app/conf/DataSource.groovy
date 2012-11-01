@@ -1,18 +1,8 @@
 dataSource {
     pooled = true
-    driverClassName = "com.mysql.jdbc.Driver"
-    dialect = org.hibernate.dialect.MySQL5InnoDBDialect
-    username = "root"
+    driverClassName = "org.h2.Driver"
+    username = "sa"
     password = ""
-    properties {
-        maxActive = 50
-        minIdle = 1
-        numTestsPerEvictionRun = 3
-        testOnReturn = true
-        validationQuery = "SELECT 1"
-        minEvictableIdleTimeMillis = (1000 * 60 * 5)
-        timeBetweenEvictionRunsMillis = (1000 * 60 * 5)
-    }
 }
 
 hibernate {
@@ -25,7 +15,7 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost:3306/taskwatch_dev?useUnicode=yes&characterEncoding=UTF-8"
+            url = "jdbc:h2:file:~/taskwatchDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
     }
     test {

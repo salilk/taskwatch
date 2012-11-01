@@ -1,122 +1,73 @@
-<!doctype html>
-<html>
-	<head>
-		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
-		<style type="text/css" media="screen">
-			#status {
-				background-color: #eee;
-				border: .2em solid #fff;
-				margin: 2em 2em 1em;
-				padding: 1em;
-				width: 12em;
-				float: left;
-				-moz-box-shadow: 0px 0px 1.25em #ccc;
-				-webkit-box-shadow: 0px 0px 1.25em #ccc;
-				box-shadow: 0px 0px 1.25em #ccc;
-				-moz-border-radius: 0.6em;
-				-webkit-border-radius: 0.6em;
-				border-radius: 0.6em;
-			}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="layout" content="main"/>
+    <title>Task watch</title>
+</head>
 
-			.ie6 #status {
-				display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
-			}
+<body>
+<g:set var="appName" value="${grails.util.GrailsNameUtils.getNaturalName(g.meta(name: 'app.name'))}" scope="page"/>
+<div class="row-fluid">
+    <div class="span9">
+        <div class="hero-unit">
+            <h1>Welcome to Task Watch</h1>
 
-			#status ul {
-				font-size: 0.9em;
-				list-style-type: none;
-				margin-bottom: 0.6em;
-				padding: 0;
-			}
-            
-			#status li {
-				line-height: 1.3;
-			}
+            <p>Congratulations, you have successfully started Task Watch application.</p>
 
-			#status h1 {
-				text-transform: uppercase;
-				font-size: 1.1em;
-				margin: 0 0 0.3em;
-			}
+            <div class="form-horizontal">
+                <a class="btn btn-primary" href="http://grails.org/doc/latest/">Learn Grails &raquo;</a>
+                <a class="btn btn-primary" href="http://twitter.github.com/bootstrap/">Learn Bootstrap &raquo;</a>
+            </div>
 
-			#page-body {
-				margin: 2em 1em 1.25em 18em;
-			}
+        </div>
+    </div>
 
-			h2 {
-				margin-top: 1em;
-				margin-bottom: 0.3em;
-				font-size: 1em;
-			}
+    <div class="span3">
+        <div class="accordion" id="accordion2">
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle btn btn-info" data-toggle="collapse" data-parent="#accordion2" href="#application-status">
+                        Application Status
+                    </a>
+                </div>
 
-			p {
-				line-height: 1.5;
-				margin: 0.25em 0;
-			}
+                <div id="application-status" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <ul class="unstyled">
+                            <li>App version: <g:meta name="app.version"/></li>
+                            <li>Grails version: <g:meta name="app.grails.version"/></li>
+                            <li>Groovy version: ${org.codehaus.groovy.runtime.InvokerHelper.getVersion()}</li>
+                            <li>JVM version: ${System.getProperty('java.version')}</li>
+                            <li>ReloadiCompany 2012ng active: ${grails.util.Environment.reloadingAgentEnabled}</li>
+                            <li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
+                            <li>Domains: ${grailsApplication.domainClasses.size()}</li>
+                            <li>Services: ${grailsApplication.serviceClasses.size()}</li>
+                            <li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-			#controller-list ul {
-				list-style-position: inside;
-			}
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle btn btn-info" data-toggle="collapse" data-parent="#accordion2" href="#installed-plugins">
+                        Installed-Plugins
+                    </a>
+                </div>
 
-			#controller-list li {
-				line-height: 1.3;
-				list-style-position: inside;
-				margin: 0.25em 0;
-			}
+                <div id="installed-plugins" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <ul class="unstyled">
+                            <g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
+                                <li>${plugin.name} - ${plugin.version}</li>
+                            </g:each>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-			@media screen and (max-width: 480px) {
-				#status {
-					display: none;
-				}
-
-				#page-body {
-					margin: 0 1em 1em;
-				}
-
-				#page-body h1 {
-					margin-top: 0;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
-			<h1>Application Status</h1>
-			<ul>
-				<li>App version: <g:meta name="app.version"/></li>
-				<li>Grails version: <g:meta name="app.grails.version"/></li>
-				<li>Groovy version: ${org.codehaus.groovy.runtime.InvokerHelper.getVersion()}</li>
-				<li>JVM version: ${System.getProperty('java.version')}</li>
-				<li>Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</li>
-				<li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
-				<li>Domains: ${grailsApplication.domainClasses.size()}</li>
-				<li>Services: ${grailsApplication.serviceClasses.size()}</li>
-				<li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
-			</ul>
-			<h1>Installed Plugins</h1>
-			<ul>
-				<g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-					<li>${plugin.name} - ${plugin.version}</li>
-				</g:each>
-			</ul>
-		</div>
-		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<p>Congratulations, you have successfully started your first Grails application! At the moment
-			   this is the default page, feel free to modify it to either redirect to a controller or display whatever
-			   content you may choose. Below is a list of controllers that are currently deployed in this application,
-			   click on each to execute its default action:</p>
-
-			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
-				</ul>
-			</div>
-		</div>
-	</body>
+</body>
 </html>
