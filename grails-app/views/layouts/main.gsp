@@ -7,8 +7,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <g:set var="appName" value="${grails.util.GrailsNameUtils.getNaturalName(g.meta(name: 'app.name'))}" scope="page"/>
-    <title>${appName} | <g:layoutTitle/></title>
+    <g:set var="appName" value="Task Watch" scope="page"/>
+    <title>Task Watch | <g:layoutTitle/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'custom.css')}"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}"/>
@@ -28,28 +28,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="/">${appName}</a>
+            <a class="brand" href="/">Task Watch</a>
 
             <div class="nav-collapse collapse">
-                %{-- <p class="navbar-text pull-right">
-                    Logged in as <a href="#" class="navbar-link">${session.email}</a>
-                </p>--}%
+                <div class="navbar-search input-prepend pull-right">
+                    <span class="add-on"><i class="icon-search"></i></span><input class="span2" id="prependedInput" size="16" type="text" placeholder="Search">
+                </div>
                 <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#controllers">
-                            Controllers
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="controllersMenu">
-                            <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName }}">
-                                <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.name}</g:link></li>
-                            </g:each>
-                        </ul>
-                    </li>
+                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName }}">
+                        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.name}</g:link></li>
+                    </g:each>
                 </ul>
-
-                <oauth:connect provider="facebook" class="pull-right">Connect to facebook</oauth:connect>
             </div>
         </div>
     </div>
@@ -57,18 +46,7 @@
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span2">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header">Controllers</li>
-                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName }}">
-                        <li><g:link controller="${c.logicalPropertyName}">${c.name}</g:link></li>
-                    </g:each>
-                </ul>
-            </div>
-        </div>
-
-        <div class="span10">
+        <div class="span12">
             <g:if test="${flash.error}">
                 <div class="alert alert-error">
                     <button type="button" class="close" data-dismiss="alert">×</button>
