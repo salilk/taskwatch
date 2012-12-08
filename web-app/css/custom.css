@@ -1,10 +1,12 @@
-body {
-    padding-top: 60px;
-    padding-bottom: 40px;
+.modal {
+    width: 600px;
 }
 
-.sidebar-nav {
-    padding: 9px 0;
+.custom-name {
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 footer .navbar {

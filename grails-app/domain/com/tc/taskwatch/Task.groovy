@@ -5,10 +5,20 @@ class Task {
     String description
     Integer timeEstimated
     Integer timeChallenged
-    Long timeTaskStarted
-    Long timeTaskFinished
-    Date dateCreated
-    Date lastUpdated
+    Date timeTaskStarted
+    Date timeTaskFinished
+
+    static mapping = {
+        description type: 'text'
+    }
+
+    static constraints = {
+        description(nullable: false)
+        timeChallenged(nullable: true)
+        timeTaskStarted(nullable: true)
+        timeTaskFinished(nullable: true)
+    }
+
     //TODO: question of pausing/resuming a task
 
     Long getActualTimeSpentMillis() {
@@ -18,24 +28,10 @@ class Task {
         return 0
     }
 
-    static mapping = {
-        description type: 'text'
-    }
-
-    static constraints = {
-        description(nullable: false)
-        dateCreated(nullable: true)
-        lastUpdated(nullable: true)
-        timeChallenged(nullable: true)
-        timeTaskStarted(nullable: true)
-        timeTaskFinished(nullable: true)
-    }
-
     Integer getTimeActual() {
         if (timeTaskFinished) {
             return (timeTaskFinished - timeTaskStarted) / 1000 * 60
         }
-        0
     }
 
     Integer getScore() {
@@ -43,7 +39,6 @@ class Task {
         if (timeTaken > 0) {
             getScore(timeEstimated, timeActual, (timeChallenged ?: timeEstimated))
         }
-        0
     }
 
     Integer getScore(Integer estimate, Integer actual, Integer challenge) {
@@ -57,7 +52,10 @@ class Task {
 
         println "score and challenge diff: ${score - scoreChallenge}"
 
-        0
+    }
+
+    BigDecimal getChallengedTimeInSeconds() {
+        return (timeChallenged * 60)
     }
 
 }

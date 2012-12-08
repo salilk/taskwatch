@@ -8,17 +8,26 @@
 <body>
 <g:set var="appName" value="${grails.util.GrailsNameUtils.getNaturalName(g.meta(name: 'app.name'))}" scope="page"/>
 <div class="row-fluid">
-    <div class="span9">
-        <div class="hero-unit">
-            <h1>Welcome to Task Watch</h1>
+    <div class="span6">
+        <div class="accordion" id="accordion0">
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle btn btn-info" data-toggle="collapse" href="#available-comtrollers">
+                        Available Controllers
+                    </a>
+                </div>
 
-            <p>Congratulations, you have successfully started Task Watch application.</p>
-
-            <div class="form-horizontal">
-                <a class="btn btn-primary" href="http://grails.org/doc/latest/">Learn Grails &raquo;</a>
-                <a class="btn btn-primary" href="http://twitter.github.com/bootstrap/">Learn Bootstrap &raquo;</a>
+                <div id="available-comtrollers" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <ul class="unstyled">
+                            <li><strong>Controller Name <span class="pull-right">Package Name</span></strong><hr></li>
+                            <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.packageName }}">
+                                <li><g:link controller="${c.logicalPropertyName}">${c.name}</g:link><span class="pull-right">${c.fullName}</span></li>
+                            </g:each>
+                        </ul>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 
@@ -26,7 +35,7 @@
         <div class="accordion" id="accordion2">
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <a class="accordion-toggle btn btn-info" data-toggle="collapse" data-parent="#accordion2" href="#application-status">
+                    <a class="accordion-toggle btn btn-info" data-toggle="collapse" href="#application-status">
                         Application Status
                     </a>
                 </div>
@@ -47,22 +56,24 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="accordion-group">
-                <div class="accordion-heading">
-                    <a class="accordion-toggle btn btn-info" data-toggle="collapse" data-parent="#accordion2" href="#installed-plugins">
-                        Installed-Plugins
-                    </a>
-                </div>
+    <div class="span3">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle btn btn-info" data-toggle="collapse" href="#installed-plugins">
+                    Installed-Plugins
+                </a>
+            </div>
 
-                <div id="installed-plugins" class="accordion-body collapse">
-                    <div class="accordion-inner">
-                        <ul class="unstyled">
-                            <g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-                                <li>${plugin.name} - ${plugin.version}</li>
-                            </g:each>
-                        </ul>
-                    </div>
+            <div id="installed-plugins" class="accordion-body collapse in">
+                <div class="accordion-inner">
+                    <ul class="unstyled">
+                        <g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
+                            <li>${plugin.name} - ${plugin.version}</li>
+                        </g:each>
+                    </ul>
                 </div>
             </div>
         </div>

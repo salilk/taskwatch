@@ -1,78 +1,38 @@
 <%@ page import="com.tc.taskwatch.Task" %>
 
+<div class="control-group">
+    <label class="control-label" for="timeChallenged">
+        <g:message code="task.timeChallenged.label" default="Time Challenged"/>
+    </label>
 
+    <div class="controls">
+        <div class="input-append bootstrap-timepicker-component">
+            <input type="text" name="timeChallenged" class="timepicker-default input-small" placeholder="hrs:mins"/>
+            <span class="add-on"><i class="icon-time"></i></span>
+        </div>
+    </div>
+</div>
 
-<table class="table table-bordered">
+<div class="control-group">
+    <label class="control-label" for="timeEstimated">
+        <g:message code="task.timeEstimated.label" default="Time Estimated"/>
+        <span class="required-indicator">*</span>
+    </label>
 
-    <tr>
+    <div class="controls">
+        <div class="input-append bootstrap-timepicker-component">
+            <input type="text" name="timeEstimated" class="timepicker-default input-small"placeholder="hrs:mins" />
+            <span class="add-on"><i class="icon-time"></i></span>
+        </div>
+    </div>
+</div>
 
-        <td>
-            <label for="description">
-                <g:message code="task.description.label" default="Description"/>
+<div class="control-group">
+    <label class="control-label" for="description">
+        <g:message code="task.description.label" default="Description"/>
+    </label>
 
-            </label>
-        </td>
-        <td>
-            <g:textArea cols="20" rows="5" name="description" value=""/>
-        </td>
-
-    </tr>
-
-    <tr>
-
-        <td>
-            <label for="timeChallenged">
-                <g:message code="task.timeChallenged.label" default="Time Challenged"/>
-
-            </label>
-        </td>
-        <td>
-            <g:field name="timeChallenged" type="number" value=""/>
-        </td>
-
-    </tr>
-
-    <tr>
-
-        <td>
-            <label for="timeTaskStarted">
-                <g:message code="task.timeTaskStarted.label" default="Time Task Started"/>
-
-            </label>
-        </td>
-        <td>
-            <g:field name="timeTaskStarted" type="number" value=""/>
-        </td>
-
-    </tr>
-
-    <tr>
-
-        <td>
-            <label for="timeTaskFinished">
-                <g:message code="task.timeTaskFinished.label" default="Time Task Finished"/>
-
-            </label>
-        </td>
-        <td>
-            <g:field name="timeTaskFinished" type="number" value=""/>
-        </td>
-
-    </tr>
-
-    <tr>
-
-        <td>
-            <label for="timeEstimated">
-                <g:message code="task.timeEstimated.label" default="Time Estimated"/>
-                <span class="required-indicator">*</span>
-            </label>
-        </td>
-        <td>
-            <g:field name="timeEstimated" type="number" value="" required=""/>
-        </td>
-
-    </tr>
-
-</table>
-
+    <div class="controls">
+        <g:textArea cols="20" rows="5" name="description" class="span4" value="${taskInstance?.description}"/>
+    </div>
+</div>

@@ -22,11 +22,13 @@
 
         <g:sortableColumn property="description" title="Description"/>
 
-        <g:sortableColumn property="timeTaskStarted" title="Time Task Started"/>
+        <th>Remaining Time</th>
 
-        <g:sortableColumn property="timeChallenged" title="Time Challenged'"/>
+        <g:sortableColumn property="timeChallenged" title="Challenged Time"/>
 
-        <g:sortableColumn property="timeTaskFinished" title="Time Elapsed"/>
+        <g:sortableColumn property="timeEstimated" title="Estimated Time"/>
+
+        <g:sortableColumn property="timeTaskFinished" title="Elapsed Time"/>
 
         <th>Action</th>
 
@@ -35,20 +37,18 @@
     <tbody>
     <g:each in="${taskInstanceList}" status="i" var="taskInstance">
         <tr>
+            <td><g:link action="show" id="${taskInstance?.id}"><div class="custom-name">${fieldValue(bean: taskInstance, field: "description")}</div></g:link></td>
 
-            <td><g:link action="show" id="${taskInstance.id}">${fieldValue(bean: taskInstance, field: "description")}</g:link></td>
+            <td class="countdowntime${taskInstance?.id}"></td>
 
-            <td>${fieldValue(bean: taskInstance, field: "timeTaskStarted")}</td>
+            <td><tw:time value="${taskInstance?.timeChallenged}"/></td>
 
-            <td>${fieldValue(bean: taskInstance, field: "timeChallenged")}</td>
+            <td><tw:time value="${taskInstance?.timeEstimated}"/></td>
 
-            <td>${fieldValue(bean: taskInstance, field: "timeTaskFinished")}</td>
+            <td><tw:time value="${taskInstance?.timeTaskFinished}"/></td>
 
             <td>
-                <div class="btn-group" data-toggle="buttons-radio">
-                    <a href="#" class="btn btn-primary">Start</a> |
-                    <a href="#" class="btn btn-danger">Stop</a>
-                </div>
+                <button type="button" class="btn btn-primary start" id="${taskInstance?.id}" data-loading-text="Pause">Start</button>
             </td>
 
         </tr>
@@ -78,5 +78,10 @@
         </div>
     </g:form>
 </div>
+<script type="text/javascript">
+    var urls = {
+        challengedTimeUrl:"${createLink(controller: 'task', action: 'getChallengedTime')}"
+    }
+</script>
 </body>
 </html>

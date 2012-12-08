@@ -12,9 +12,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'custom.css')}"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}"/>
+    <style type="text/css">
+    body {
+        padding-top: 60px;
+    }
+    </style>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery.countdown.css')}"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'timepicker.css')}"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'custom.css')}"/>
+
     <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-1.8.0.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'bootstrap-button.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'bootstrap-timepicker.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.countdown.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'application.js')}"></script>
     <g:layoutHead/>
 </head>
@@ -30,10 +42,12 @@
             </a>
             <a class="brand" href="/">Task Watch</a>
 
+            <div class="navbar-search input-append pull-right">
+                <input class="span2" id="searchBox" size="16" type="text" placeholder="Search">
+                <span class="add-on"><i class="icon-search"></i></span>
+            </div>
+
             <div class="nav-collapse collapse">
-                <div class="navbar-search input-prepend pull-right">
-                    <span class="add-on"><i class="icon-search"></i></span><input class="span2" id="prependedInput" size="16" type="text" placeholder="Search">
-                </div>
                 <ul class="nav">
                     <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName }}">
                         <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.name}</g:link></li>
@@ -45,29 +59,25 @@
 </div>
 
 <div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
-            <g:if test="${flash.error}">
-                <div class="alert alert-error">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    ${flash.error}
-                </div>
-            </g:if>
-            <g:if test="${flash.success}">
-                <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    ${flash.success}
-                </div>
-            </g:if>
-            <g:layoutBody/>
+    <g:if test="${flash.error}">
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            ${flash.error}
         </div>
-    </div>
-    <footer>
-        <div class="navbar navbar-fixed-bottom">
-            <p>&copy;&nbsp;<a href="http://www.intelligrape.com">Intelligrape Software Ltd.</a></p>
+    </g:if>
+    <g:if test="${flash.success}">
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            ${flash.success}
         </div>
-    </footer>
+    </g:if>
+    <g:layoutBody/>
 </div>
+<footer>
+    <div class="navbar navbar-fixed-bottom">
+        <p>&copy;&nbsp;<a href="http://www.intelligrape.com">Intelligrape Software Ltd.</a></p>
+    </div>
+</footer>
 
 </body>
 </html>
